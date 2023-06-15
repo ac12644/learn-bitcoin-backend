@@ -4,6 +4,17 @@ Welcome to the Bitcoin Wallet Backend Playground documentation! This API allows 
 
 **Note: This API is for learning purposes only and should not be used in a production environment.**
 
+**Project Checklist**
+
+- [x] Create wallet functionality
+- [x] Create HD wallet functionality
+- [x] Get balance of an address
+- [x] Get transactions of an address
+- [ ] Implement transaction sending functionality
+- [ ] Implement transaction receiving functionality
+- [ ] Implement reimbursement functionality
+- [ ] Implement recurring payments functionality
+
 ## Getting Started
 
 To get started with the API, follow the steps below:

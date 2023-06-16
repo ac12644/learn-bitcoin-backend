@@ -27,7 +27,11 @@ const generateWallet = (network = testnet) => {
     address: address.toString(),
   };
 
-  localStorage.setItem("wallet", JSON.stringify(wallet));
+  // Retrieve existing wallets from local storage
+  const existingWallets = JSON.parse(localStorage.getItem("wallets")) || [];
+  const updatedWallets = [...existingWallets, wallet];
+
+  localStorage.setItem("wallets", JSON.stringify(updatedWallets));
 
   return wallet;
 };
@@ -44,7 +48,11 @@ const generateHDWallet = (network = testnet) => {
     mnemonic: passPhrase.toString(),
   };
 
-  localStorage.setItem("hdWallet", JSON.stringify(hdWallet));
+  // Retrieve existing wallets from local storage
+  const existingWallets = JSON.parse(localStorage.getItem("wallets")) || [];
+  const updatedWallets = [...existingWallets, hdWallet];
+
+  localStorage.setItem("wallets", JSON.stringify(updatedWallets));
 
   return hdWallet;
 };

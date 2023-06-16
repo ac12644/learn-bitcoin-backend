@@ -14,6 +14,7 @@
     "bitcore-mnemonic": "^10.0.5",
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
-    "node-localstorage": "^2.2.1"
+    "node-localstorage": "^2.2.1",
+    "qrcode": "^1.5.3"
   }
 }

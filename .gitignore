@@ -5,3 +5,6 @@ npm-debug.log
 
 # Scratch folder
 /scratch/
+
+# QR code folder
+/qrCodes/

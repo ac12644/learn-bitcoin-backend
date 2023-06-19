@@ -1,16 +1,14 @@
 # Bitcoin Wallet Backend Playground
 
-Welcome to the Bitcoin Wallet Backend Playground documentation! This API allows you to learn and experiment with Bitcoin wallets and transactions. This API will help you understand the basics of creating wallets, managing balances, and exploring transactions.
+API for learning and experimenting with Bitcoin wallets and transactions.
 
-**Note: This API is for learning purposes only and should not be used in a production environment.**
-
-**Project Checklist**
+## Project Checklist
 
 - [x] Create wallet functionality
 - [x] Create HD wallet functionality
 - [x] Get balance of an address
 - [x] Get transactions of an address
-- [ ] Implement transaction sending functionality
+- [x] Implement transaction sending functionality
 - [ ] Implement transaction receiving functionality
 - [ ] Implement reimbursement functionality
 - [ ] Implement recurring payments functionality
@@ -20,29 +18,21 @@ Welcome to the Bitcoin Wallet Backend Playground documentation! This API allows 
 To get started with the API, follow the steps below:
 
 1. Install the required dependencies:
-
-   - Node.js
-   - Express.js
-   - Bitcore-lib
-
-2. Clone the repository to your local machine:
-
-   ```
-   git clone https://github.com/your-username/my-wallet-api.git
-   ```
-
-3. Navigate to the project directory:
-
-   ```
-   cd my-wallet-api
-   ```
-
-4. Install the project dependencies:
-
    ```
    npm install
    ```
-
+2. Clone the repository to your local machine:
+   ```
+   git clone https://github.com/your-username/my-wallet-api.git
+   ```
+3. Navigate to the project directory:
+   ```
+   cd my-wallet-api
+   ```
+4. Install the project dependencies:
+   ```
+   npm install
+   ```
 5. Start the server:
    ```
    node app.js
@@ -54,31 +44,33 @@ Now you're ready to interact with the API endpoints described below.
 
 ### Create Wallet
 
-Create a new wallet and get its details.
-
 - **Endpoint:** `/wallet`
 - **Method:** GET
+- **Description:** Create a new wallet and get its details.
 
 ### Create HD Wallet
 
-Create a new hierarchical deterministic (HD) wallet and get its details.
-
 - **Endpoint:** `/wallet/hd`
 - **Method:** GET
+- **Description:** Create a new hierarchical deterministic (HD) wallet and get its details.
 
 ### Get Balance
 
-Get the balance of a specific address.
-
 - **Endpoint:** `/transactions/balance/:address`
 - **Method:** GET
+- **Description:** Get the balance of a specific address.
 
 ### Get Transactions
 
-Get the transactions associated with a specific address.
-
 - **Endpoint:** `/transactions/:address`
 - **Method:** GET
+- **Description:** Get the transactions associated with a specific address.
+
+### Send BTC
+
+- **Endpoint:** `/sendbtc`
+- **Method:** POST
+- **Description:** Send Bitcoin from a specific address to another.
 
 ## Examples
 
@@ -86,13 +78,19 @@ Here are some example requests and responses for the API endpoints:
 
 ### Create Wallet
 
-#### Request
+**Request:**
 
 ```http
 GET /wallet
 ```
 
-#### Response
+**Request Body:**
+
+```json
+
+```
+
+**Response:**
 
 ```json
 {
@@ -103,13 +101,19 @@ GET /wallet
 
 ### Create HD Wallet
 
-#### Request
+**Request:**
 
 ```http
 GET /wallet/hd
 ```
 
-#### Response
+**Request Body:**
+
+```json
+
+```
+
+**Response:**
 
 ```json
 {
@@ -122,13 +126,19 @@ GET /wallet/hd
 
 ### Get Balance
 
-#### Request
+**Request:**
 
 ```http
 GET /transactions/balance/:address
 ```
 
-#### Response
+**Request Body:**
+
+```json
+
+```
+
+**Response:**
 
 ```json
 {
@@ -138,13 +148,19 @@ GET /transactions/balance/:address
 
 ### Get Transactions
 
-#### Request
+**Request:**
 
 ```http
 GET /transactions/:address
 ```
 
-#### Response
+**Request Body:**
+
+```json
+
+```
+
+**Response:**
 
 ```json
 {
@@ -189,18 +205,34 @@ GET /transactions/:address
           "scriptpubkey_address": "mqDziBnVjjFT9oZjRxNGPuatxTf245zybf",
           "value": 1216059
         }
-      ],
-      "size": 228,
-      "weight": 585,
-      "fee": 147,
-      "status": {
-        "confirmed": true,
-        "block_height": 2437736,
-        "block_hash": "0000000000000018985b8447833b9b47527cd9a83da3ccdeef6bcddfd2052585",
-        "block_time": 1686776311
-      }
+      ]
     }
   ]
+}
+```
+
+### Send BTC
+
+**Request:**
+
+```http
+POST /sendbtc
+```
+
+**Request Body:**
+
+```json
+{
+  "to": "destination_BTC_address",
+  "amount": 0.01
+}
+```
+
+**Response:**
+
+```json
+{
+  "txId": "transaction_id"
 }
 ```
 
@@ -208,14 +240,16 @@ GET /transactions/:address
 
 To get test BTC for your generated wallet, you can visit [CoinFaucet.eu](https://coinfaucet.eu/en/btc-testnet/) which provides a faucet for Bitcoin testnet. Follow these steps:
 
-1. Visit [CoinFaucet.eu](https://coinfaucet.eu/en/btc-testnet/) in your web browser.
+1. Visit CoinFaucet.eu in your web browser.
 2. Enter your testnet address (generated from the API) in the provided field.
 3. Complete any required verification (e.g., CAPTCHA) if prompted.
 4. Click on the "Get Coins" or similar button to request test BTC.
 5. Wait for the transaction to be processed, and you should receive test BTC in your generated wallet.
 
-Please note that the availability and functionality of the faucet may vary, so you may need to explore alternative options if the mentioned faucet is not working or accessible.
+## Contributions
+
+Contributions are welcome! If you find any issues or have suggestions for improvement, please feel free to contribute by creating a pull request.
 
 Happy learning and exploring with your Bitcoin wallet API!
 
-Feel free to modify and customize the content according to your specific needs. Happy learning!
+Feel free to modify and customize the content according to your specific needs.

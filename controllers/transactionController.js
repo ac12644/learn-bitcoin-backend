@@ -1,12 +1,11 @@
 const axios = require("axios");
-const { LocalStorage } = require("node-localstorage");
-const localStorage = new LocalStorage("./scratch");
+const bitcore = require("bitcore-lib");
 
 // Get the balance of an address
 exports.getBalance = async (req, res) => {
   const address = req.params.address;
   const balance = await fetchBalance(address);
-  res.json({ balance });
+  res.json({ balance: bitcore.Unit.fromSatoshis(balance).toBTC() });
 };
 
 // Get the transactions of an address

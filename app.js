@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const walletRoutes = require("./routes/wallet");
 const transactionRoutes = require("./routes/transaction");
 const paymentRoutes = require("./routes/payment");
+const sendBtcRouter = require("./routes/sendBtc");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 app.use("/wallet", walletRoutes);
 app.use("/transactions", transactionRoutes);
 app.use("/payment", paymentRoutes);
+app.use("/sendbtc", sendBtcRouter);
 
 // API Documentation
 app.get("/", (req, res) => {
@@ -84,42 +86,30 @@ app.get("/", (req, res) => {
       },
     },
     {
-      route: "/transactions/send",
-      description: "Send a Bitcoin transaction",
+      route: "/sendbtc",
+      description: "Send Bitcoin from a specific address to another",
       method: "POST",
       parameters: [
         {
-          name: "senderPrivateKey",
-          description: "The private key of the sender's Bitcoin address",
-        },
-        {
-          name: "recipientAddress",
-          description: "The Bitcoin address of the recipient",
+          name: "to",
+          description: "The Bitcoin address to send the BTC to",
+          type: "string",
+          required: true,
         },
         {
           name: "amount",
-          description: "The amount of Bitcoin to send",
+          description: "The amount of BTC to send",
+          type: "number",
+          required: true,
         },
       ],
-      response: {
-        example: {
-          result: "Transaction successfully sent",
-        },
+      body_example: {
+        to: "destination_BTC_address",
+        amount: 0.01,
       },
-    },
-    {
-      route: "/transactions/receive",
-      description: "Receive a Bitcoin transaction",
-      method: "POST",
-      parameters: [
-        {
-          name: "transactionPayload",
-          description: "The payload of the received Bitcoin transaction",
-        },
-      ],
       response: {
         example: {
-          result: "Transaction successfully received",
+          txId: "transaction_id",
         },
       },
     },

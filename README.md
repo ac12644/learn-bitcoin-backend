@@ -1,15 +1,17 @@
-# Bitcoin Wallet Backend Playground
+# ₿itcoin API Playground
 
-API for learning and experimenting with Bitcoin wallets and transactions.
+A comprehensive API for experimenting with Bitcoin wallets, transactions, and more.
 
 ## Project Checklist
 
-- [x] Create wallet functionality
-- [x] Create HD wallet functionality
+- [x] Create wallet
+- [x] Create HD wallet
+- [x] Retrieve Wallet
 - [x] Get balance of an address
 - [x] Get transactions of an address
-- [x] Implement transaction sending functionality
-- [ ] Implement transaction receiving functionality
+- [x] Send transaction
+- [x] Receive transaction using QR Code
+- [x] Create timelock transaction
 - [ ] Implement reimbursement functionality
 - [ ] Implement recurring payments functionality
 
@@ -23,11 +25,11 @@ To get started with the API, follow the steps below:
    ```
 2. Clone the repository to your local machine:
    ```
-   git clone https://github.com/your-username/my-wallet-api.git
+   git clone https://github.com/ac12644/bitcoin-api-playground.git
    ```
 3. Navigate to the project directory:
    ```
-   cd my-wallet-api
+   cd bitcoin-api-playground
    ```
 4. Install the project dependencies:
    ```
@@ -54,6 +56,12 @@ Now you're ready to interact with the API endpoints described below.
 - **Method:** GET
 - **Description:** Create a new hierarchical deterministic (HD) wallet and get its details.
 
+### Retrieve Wallet
+
+- **Endpoint:** `/wallet/retrieveWallet`
+- **Method:** GET
+- **Description:** Import wallet details from a mnemonic phrase.
+
 ### Get Balance
 
 - **Endpoint:** `/transactions/balance/:address`
@@ -71,6 +79,12 @@ Now you're ready to interact with the API endpoints described below.
 - **Endpoint:** `/sendbtc`
 - **Method:** POST
 - **Description:** Send Bitcoin from a specific address to another.
+
+### Timelock
+
+- **Endpoint:** `/timeLock`
+- **Method:** POST
+- **Description:** Create a time-locked Bitcoin transaction.
 
 ## Examples
 

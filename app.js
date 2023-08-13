@@ -4,6 +4,7 @@ const walletRoutes = require("./routes/wallet");
 const transactionRoutes = require("./routes/transaction");
 const paymentRoutes = require("./routes/payment");
 const sendBtcRouter = require("./routes/sendBtc");
+const timeLockRouter = require("./routes/timeLock");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use("/wallet", walletRoutes);
 app.use("/transactions", transactionRoutes);
 app.use("/payment", paymentRoutes);
 app.use("/sendbtc", sendBtcRouter);
+app.use("/timeLock", timeLockRouter);
 
 // API Documentation
 app.get("/", (req, res) => {
@@ -33,6 +35,27 @@ app.get("/", (req, res) => {
       route: "/wallet/hd",
       description: "Create a new HD wallet",
       method: "GET",
+      response: {
+        example: {
+          xpub: "your_xpub_key",
+          privateKey: "your_private_key",
+          address: "your_wallet_address",
+          mnemonic: "your_mnemonic_phrase",
+        },
+      },
+    },
+    {
+      route: "/wallet/retrieveWallet",
+      description: "Import wallet details from a mnemonic phrase",
+      method: "GET",
+      parameters: [
+        {
+          name: "mnemonic",
+          description: "Mnemonic phrase to derive wallet details",
+          type: "string",
+          required: true,
+        },
+      ],
       response: {
         example: {
           xpub: "your_xpub_key",
@@ -113,6 +136,7 @@ app.get("/", (req, res) => {
         },
       },
     },
+
     {
       route: "payment/payment-request-qr",
       description: "Generate a payment request with a QR code",
@@ -142,7 +166,43 @@ app.get("/", (req, res) => {
         },
       },
     },
-    // Add more routes and descriptions here
+    {
+      route: "/timeLock",
+      description: "Create a time-locked Bitcoin transaction",
+      method: "POST",
+      parameters: [
+        {
+          name: "recipientAddress",
+          description:
+            "The Bitcoin address to which funds should be sent once the time-lock expires",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "amountInBTC",
+          description: "The amount in Bitcoin to send",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "timestamp",
+          description:
+            "The Unix timestamp after which the transaction can be broadcasted",
+          type: "number",
+          required: true,
+        },
+      ],
+      body_example: {
+        recipientAddress: "your_bitcoin_address",
+        amountInBTC: "0.01",
+        timestamp: 1694617883,
+      },
+      response: {
+        example: {
+          transaction: "serialized_transaction_string",
+        },
+      },
+    },
   ];
 
   const documentation = routes.map((route) => {
@@ -156,65 +216,95 @@ app.get("/", (req, res) => {
   });
 
   res.send(`
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.17/tailwind.min.css">
-      <title>My Bitcoin Wallet API</title>
-    </head>
-    <body>
-      <div class="container mx-auto p-6">
-        <h1 class="text-3xl mb-6">My Bitcoin Wallet API</h1>
-        <p class="mb-4">Welcome to the My Bitcoin Wallet API! Below are the available routes:</p>
-        <ul class="space-y-4">
-          ${documentation
-            .map(
-              (doc) => `
-                <li class="bg-gray-100 rounded-lg p-4">
+  <!DOCTYPE html>
+   <html lang="en">
+      <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <!-- Basic SEO tags -->
+         <title>Bitcoin API</title>
+         <meta name="description" content="An API interface for Bitcoin operations.">
+         <meta name="keywords" content="Bitcoin, Wallet, API, Cryptocurrency, Blockchain">
+         <!-- Open Graph / Facebook tags -->
+         <meta property="og:type" content="website">
+         <meta property="og:url" content="https://github.com/ac12644/bitcoin-backend-playground">
+         <meta property="og:title" content="Bitcoin Wallet API">
+         <meta property="og:description" content="An API interface for Bitcoin wallet operations.">
+         <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png">
+         <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/800px-Bitcoin.svg.png" type="image/x-icon">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.17/tailwind.min.css">
+         <style>
+            body {
+            background-color: #f2a900;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            }
+            .api-card {
+            background-color: #1A1A1858;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .api-card:hover {
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            }
+            pre {
+            background-color: #1A1A1858;
+            border-radius: 8px;
+            }
+         </style>
+      </head>
+      <body>
+         <div class="container mx-auto p-6">
+            <h1 class="text-3xl mb-6">₿itcoin API</h1>
+            <p class="mb-4">Below are the available routes:</p>
+            <ul class="space-y-4 api-card">
+               ${documentation
+                 .map(
+                   (doc) => `
+               <li class=" rounded-lg p-4">
                   <h4 class="text-lg font-medium">${doc.method}: <code>${
-                doc.route
-              }</code></h4>
+                     doc.route
+                   }</code>
+                  </h4>
                   <p class="mb-2">${doc.description}</p>
                   ${
                     doc.parameters.length > 0
                       ? `
-                        <h5 class="font-medium mb-1">Parameters:</h5>
-                        <ul class="list-disc ml-4">
-                          ${doc.parameters
-                            .map(
-                              (param) => `
-                                <li>
-                                  <strong>${param.name}</strong>: ${param.description}
-                                </li>
-                              `
-                            )
-                            .join("")}
-                        </ul>`
+                  <h5 class="font-medium mb-1">Parameters:</h5>
+                  <ul class="list-disc ml-4">
+                     ${doc.parameters
+                       .map(
+                         (param) => `
+                     <li><strong>${param.name}</strong>: ${param.description}</li>
+                     `
+                       )
+                       .join("")}
+                  </ul>
+                  `
                       : ""
                   }
                   ${
                     Object.keys(doc.response).length > 0
                       ? `
-                        <h5 class="font-medium mb-1">Response:</h5>
-                        <pre class="bg-gray-200 p-2 rounded-lg">${JSON.stringify(
-                          doc.response.example,
-                          null,
-                          2
-                        )}</pre>
-                      `
+                  <h5 class="font-medium mb-1">Response:</h5>
+                  <pre class="p-2 rounded-lg">${JSON.stringify(
+                    doc.response.example,
+                    null,
+                    2
+                  )}</pre>
+                  `
                       : ""
                   }
-                </li>
-              `
-            )
-            .join("")}
-        </ul>
-      </div>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.4.2/alpine.min.js"></script>
-    </body>
-    </html>
+               </li>
+               `
+                 )
+                 .join("")}
+            </ul>
+         </div>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.4.2/alpine.min.js"></script>
+      </body>
+   </html>
   `);
 });
 

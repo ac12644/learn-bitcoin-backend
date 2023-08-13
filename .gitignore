@@ -8,3 +8,8 @@ npm-debug.log
 
 # QR code folder
 /qrCodes/
+
+# KMS key
+cryptokey.pem
+
+**/.DS_Store

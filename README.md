@@ -6,9 +6,11 @@ A comprehensive API for experimenting with Bitcoin wallets, transactions, and mo
 
 - [x] Create wallet
 - [x] Create HD wallet
-- [x] Retrieve Wallet
+- [x] Create Multisig Wallet
+- [x] Retrieve Wallet from MNEMONIC
 - [x] Get balance of an address
 - [x] Get transactions of an address
+- [x] Verify transaction
 - [x] Send transaction
 - [x] Receive transaction using QR Code
 - [x] Create timelock transaction

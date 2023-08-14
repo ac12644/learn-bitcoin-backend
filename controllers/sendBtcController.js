@@ -1,5 +1,6 @@
 require("dotenv").config();
 const bitcore = require("bitcore-lib");
+const { mainnet, testnet } = require("bitcore-lib/lib/networks");
 const axios = require("axios");
 
 /**
@@ -15,9 +16,6 @@ const axios = require("axios");
  */
 exports.sendBitcoin = async (req, res) => {
   try {
-    // Initialize for the Bitcoin test network
-    const testnet = bitcore.Networks.testnet;
-
     // Load the Bitcoin private key from environment variables
     const privateKey = new bitcore.PrivateKey.fromWIF(
       process.env.BITCOIN_PRIVATE_KEY,

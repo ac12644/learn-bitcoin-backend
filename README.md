@@ -56,6 +56,21 @@ Now you're ready to interact with the API endpoints described below.
 - **Method:** GET
 - **Description:** Create a new hierarchical deterministic (HD) wallet and get its details.
 
+### Create Multisig Wallet
+
+- **Endpoint:** `/wallet/multisig`
+- **Method:** POST
+- **Request Body:**
+
+```json
+{
+  "publicKeys": ["public_key_1", "public_key_2", "public_key_3"],
+  "requiredSignatures": 2
+}
+```
+
+- **Description:** Create a Multisig wallet.
+
 ### Retrieve Wallet
 
 - **Endpoint:** `/wallet/retrieveWallet`
@@ -250,15 +265,43 @@ POST /sendbtc
 }
 ```
 
+### Verify Transaction
+
+**Request:**
+
+```http
+POST /verifyTx
+```
+
+**Request Body:**
+
+```json
+// for multiple transactions
+{
+  "txids": ["transaction_id_1", "transaction_id_2", ...]
+}
+
+// for single transaction
+{
+  "txids": "transaction_id"
+}
+
+```
+
+**Response:**
+
+```json
+{
+  "txid": "transaction_id_1",
+  "confirmed": true/false,
+  "confirmations": "number_of_confirmations",
+  "message": "Transaction is confirmed/unconfirmed."
+}
+```
+
 ## Getting Test BTC
 
-To get test BTC for your generated wallet, you can visit [CoinFaucet.eu](https://coinfaucet.eu/en/btc-testnet/) which provides a faucet for Bitcoin testnet. Follow these steps:
-
-1. Visit CoinFaucet.eu in your web browser.
-2. Enter your testnet address (generated from the API) in the provided field.
-3. Complete any required verification (e.g., CAPTCHA) if prompted.
-4. Click on the "Get Coins" or similar button to request test BTC.
-5. Wait for the transaction to be processed, and you should receive test BTC in your generated wallet.
+To get test BTC for your generated wallet, you can visit [testnet-faucet.com](https://testnet-faucet.com/btc-testnet/) which provides a faucet for Bitcoin testnet.
 
 ## Contributions
 

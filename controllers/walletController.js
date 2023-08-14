@@ -1,3 +1,4 @@
+const bitcore = require("bitcore-lib");
 const { PrivateKey } = require("bitcore-lib");
 const { mainnet, testnet } = require("bitcore-lib/lib/networks");
 const Mnemonic = require("bitcore-mnemonic");
@@ -64,12 +65,43 @@ const generateHDWallet = (network = testnet) => {
   };
 
   // Retrieve existing wallets from local storage
-  const existingWallets = JSON.parse(localStorage.getItem("wallets")) || [];
+  const existingWallets = JSON.parse(localStorage.getItem("hdwallets")) || [];
   const updatedWallets = [...existingWallets, hdWallet];
 
-  localStorage.setItem("wallets", JSON.stringify(updatedWallets));
+  localStorage.setItem("hdwallets", JSON.stringify(updatedWallets));
 
   return hdWallet;
+};
+
+/**
+ * Create a multisig P2SH address.
+ *
+ * @param {Object} req - Express request object containing the public keys and required signature count.
+ * @param {Object} res - Express response object, used to send back the multisig address.
+ */
+exports.createMultisig = (req, res) => {
+  const { publicKeys, requiredSignatures } = req.body;
+
+  // Validate the input
+  if (!publicKeys || publicKeys.length < requiredSignatures) {
+    return res
+      .status(400)
+      .json({ error: "Invalid public keys or required signatures count." });
+  }
+
+  // Create multisig address
+  const address = bitcore.Address.createMultisig(
+    publicKeys.map((key) => bitcore.PublicKey(key)),
+    requiredSignatures,
+    testnet // Or bitcore.Networks.testnet for testnet
+  );
+  // Retrieve existing wallets from local storage
+  const existingWallets = JSON.parse(localStorage.getItem("multisig")) || [];
+  const updatedWallets = [...existingWallets, address.toString()];
+
+  localStorage.setItem("multisig", JSON.stringify(updatedWallets));
+
+  res.json({ address: address.toString() });
 };
 
 /**

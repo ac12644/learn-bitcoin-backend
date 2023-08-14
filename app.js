@@ -5,6 +5,7 @@ const transactionRoutes = require("./routes/transaction");
 const paymentRoutes = require("./routes/payment");
 const sendBtcRouter = require("./routes/sendBtc");
 const timeLockRouter = require("./routes/timeLock");
+const verifyTxRouter = require("./routes/verifyTx");
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use("/transactions", transactionRoutes);
 app.use("/payment", paymentRoutes);
 app.use("/sendbtc", sendBtcRouter);
 app.use("/timeLock", timeLockRouter);
+app.use("/verifyTx", verifyTxRouter);
 
 // API Documentation
 app.get("/", (req, res) => {

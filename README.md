@@ -1,6 +1,6 @@
 # ₿itcoin API Playground
 
-A comprehensive API for experimenting with Bitcoin wallets, transactions, and more.
+Welcome to the ₿itcoin API Playground, a comprehensive and interactive API environment designed for experimenting with Bitcoin wallets, transactions, and blockchain interactions. Our toolkit offers a hands-on approach to understanding and implementing Bitcoin-related functionalities.
 
 ## Project Checklist
 

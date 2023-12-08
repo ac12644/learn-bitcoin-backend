@@ -11,7 +11,7 @@ Welcome to the ₿itcoin API Playground, a comprehensive and interactive API env
 
 ## Project Checklist
 
-<img align="right" src="asset/img1.png" width="380" height="400" />
+<img align="right" src="asset/img1.png" width="450" height="450" />
 
 - [x] Create wallet
 - [x] Create HD wallet

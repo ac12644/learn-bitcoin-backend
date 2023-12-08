@@ -1,8 +1,17 @@
-# ₿itcoin API Playground
+<!-- PROJECT SHIELDS -->
+
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+
+# Bitcoin API Playground
 
 Welcome to the ₿itcoin API Playground, a comprehensive and interactive API environment designed for experimenting with Bitcoin wallets, transactions, and blockchain interactions. Our toolkit offers a hands-on approach to understanding and implementing Bitcoin-related functionalities.
 
 ## Project Checklist
+
+<img align="right" src="asset/img1.png" width="380" height="400" />
 
 - [x] Create wallet
 - [x] Create HD wallet
@@ -401,3 +410,14 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 Happy learning and exploring with your Bitcoin wallet API!
 
 Feel free to modify and customize the content according to your specific needs.
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+[forks-shield]: https://img.shields.io/github/forks/ac12644/bitcoin-api-playground?style=for-the-badge
+[forks-url]: https://github.com/ac12644/bitcoin-api-playground/network/members
+[stars-shield]: https://img.shields.io/github/stars/ac12644/bitcoin-api-playground?style=for-the-badge
+[stars-url]: https://github.com/ac12644/bitcoin-api-playground/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ac12644/bitcoin-api-playground?style=for-the-badge
+[issues-url]: https://github.com/ac12644/bitcoin-api-playground/issues
+[license-shield]: https://img.shields.io/github/license/ac12644/bitcoin-api-playground?style=for-the-badge
+[license-url]: https://github.com/ac12644/bitcoin-api-playground/blob/master/LICENSE.txt

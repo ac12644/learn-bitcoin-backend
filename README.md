@@ -420,4 +420,4 @@ Feel free to modify and customize the content according to your specific needs.
 [issues-shield]: https://img.shields.io/github/issues/ac12644/bitcoin-api-playground?style=for-the-badge
 [issues-url]: https://github.com/ac12644/bitcoin-api-playground/issues
 [license-shield]: https://img.shields.io/github/license/ac12644/bitcoin-api-playground?style=for-the-badge
-[license-url]: https://github.com/ac12644/bitcoin-api-playground/blob/main/LICENSE.txt
+[license-url]: https://github.com/ac12644/bitcoin-api-playground/blob/main/LICENSE

@@ -20,7 +20,7 @@ const localStorage = new LocalStorage("./qrCodes");
  */
 exports.generatePaymentRequestQR = async (req, res) => {
   const { address, amount, message } = req.query;
-
+  if (!address || !amount) return console.log("Parameters missing!");
   try {
     // Construct the payment request string in the BIP21 format.
     const paymentRequest = `bitcoin:${address}?amount=${amount}&message=${message}`;
@@ -43,9 +43,11 @@ exports.generatePaymentRequestQR = async (req, res) => {
     const qrCodeAPIUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
       paymentRequest
     )}`;
+
     const response = await axios.get(qrCodeAPIUrl, {
       responseType: "arraybuffer",
     });
+
     const qrCodeImageBase64 = Buffer.from(response.data, "binary").toString(
       "base64"
     );

@@ -14,6 +14,9 @@ A comprehensive API for experimenting with Bitcoin wallets, transactions, and mo
 - [x] Send transaction
 - [x] Receive transaction using QR Code
 - [x] Create timelock transaction
+- [x] Estimate transaction fee
+- [x] Validate Bitcoin address
+- [x] Fetch historical Bitcoin data
 - [ ] Implement reimbursement functionality
 - [ ] Implement recurring payments functionality
 
@@ -103,6 +106,29 @@ Now you're ready to interact with the API endpoints described below.
 - **Method:** POST
 - **Description:** Create a time-locked Bitcoin transaction.
 
+### Estimate Transaction Fee
+
+- **Endpoint:** `/feeEstimate`
+- **Method:** GET
+- **Description:** Estimate transaction fees based on network congestion.
+
+### Validate Bitcoin Address
+
+- **Endpoint:** `/validateAddress`
+- **Method:** GET
+- **Query Parameters:**
+  address: The Bitcoin address to validate.
+- **Description:** Validate the format of a Bitcoin address and determine if it belongs to the mainnet or testnet.
+
+### Fetch Historical Bitcoin Data
+
+- **Endpoint:** `/historicalData`
+- **Method:** GET
+- **Query Parameters:**
+  startDate: The start date for the historical data (format YYYY-MM-DD).
+  endDate: The end date for the historical data (format YYYY-MM-DD).
+- **Description:** Fetch historical data for Bitcoin, such as past prices and transaction volumes.
+
 ## Examples
 
 Here are some example requests and responses for the API endpoints:
@@ -113,12 +139,6 @@ Here are some example requests and responses for the API endpoints:
 
 ```http
 GET /wallet
-```
-
-**Request Body:**
-
-```json
-
 ```
 
 **Response:**
@@ -136,12 +156,6 @@ GET /wallet
 
 ```http
 GET /wallet/hd
-```
-
-**Request Body:**
-
-```json
-
 ```
 
 **Response:**
@@ -163,12 +177,6 @@ GET /wallet/hd
 GET /transactions/balance/:address
 ```
 
-**Request Body:**
-
-```json
-
-```
-
 **Response:**
 
 ```json
@@ -183,12 +191,6 @@ GET /transactions/balance/:address
 
 ```http
 GET /transactions/:address
-```
-
-**Request Body:**
-
-```json
-
 ```
 
 **Response:**
@@ -298,6 +300,93 @@ POST /verifyTx
   "confirmed": true/false,
   "confirmations": "number_of_confirmations",
   "message": "Transaction is confirmed/unconfirmed."
+}
+```
+
+### Verify Transaction
+
+**Request:**
+
+```http
+POST /verifyTx
+```
+
+**Request Body:**
+
+```json
+// for multiple transactions
+{
+  "txids": ["transaction_id_1", "transaction_id_2", ...]
+}
+
+// for single transaction
+{
+  "txids": "transaction_id"
+}
+
+```
+
+**Response:**
+
+```json
+{
+  "txid": "transaction_id_1",
+  "confirmed": true/false,
+  "confirmations": "number_of_confirmations",
+  "message": "Transaction is confirmed/unconfirmed."
+}
+```
+
+### Estimate Transaction Fee
+
+**Request:**
+
+```http
+GET /feeEstimate
+```
+
+**Response:**
+
+```json
+{
+  "1": 87.882,
+  "2": 85.123,
+  ...
+}
+```
+
+### Validate Bitcoin Address
+
+**Request:**
+
+```http
+GET /validateAddress?address=yourBitcoinAddressHere
+```
+
+**Response:**
+
+```json
+{
+  "address": "yourBitcoinAddressHere",
+  "isValid": true,
+  "network": "mainnet"
+}
+```
+
+### Fetch Historical Bitcoin Data
+
+**Request:**
+
+```http
+GET /historicalData?startDate=2022-01-01&endDate=2022-01-31
+```
+
+**Response:**
+
+```json
+{
+  "prices": [...],
+  "volumes": [...]
 }
 ```
 

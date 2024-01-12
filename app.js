@@ -10,6 +10,7 @@ const verifyTxRouter = require("./routes/verifyTx");
 const validateAddressRouter = require("./routes/validateAddress");
 const estimateFeeRouter = require("./routes/estimateFee");
 const historicalDataRouter = require("./routes/historicalData");
+const reimburseBtcRouter = require("./routes/reimburseBtc");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use("/verifyTx", verifyTxRouter);
 app.use("/validateAddress", validateAddressRouter);
 app.use("/estimateFee", estimateFeeRouter);
 app.use("/historicalData", historicalDataRouter);
+app.use("/reimburseBtc", reimburseBtcRouter);
 
 // API Documentation
 app.get("/", (req, res) => {

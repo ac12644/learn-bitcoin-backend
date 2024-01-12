@@ -26,7 +26,7 @@ Welcome to the ₿itcoin API Playground, a comprehensive and interactive API env
 - [x] Estimate transaction fee
 - [x] Validate Bitcoin address
 - [x] Fetch historical Bitcoin data
-- [ ] Implement reimbursement functionality
+- [x] Implement reimbursement functionality
 - [ ] Implement recurring payments functionality
 
 ## Getting Started

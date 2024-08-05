@@ -5,9 +5,10 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-# Bitcoin API Playground
+# Learn Bitcoin Backend For Wallets
 
-Welcome to the ₿itcoin API Playground, a comprehensive and interactive API environment designed for experimenting with Bitcoin wallets, transactions, and blockchain interactions. Our toolkit offers a hands-on approach to understanding and implementing Bitcoin-related functionalities.
+Welcome to Learn Bitcoin Backend, an interactive API environment designed for experimenting with Bitcoin wallets, transactions, and blockchain interactions. This toolkit offers a hands-on approach to understanding and implementing Bitcoin-related functionalities.
+
 
 ## Project Checklist
 
